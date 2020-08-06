@@ -2,30 +2,38 @@
 var generateBtn = document.querySelector("#generate");
 console.log("text")
 
-// var special characters && ! @ # 
+// var special characters && ! @ # (make an array for each)
+
+
 
 // Write password to the #password input
 
 function writePassword() {
   var howMuch = prompt ("Specify number of characters");
   if (howMuch < 8) {
-    alert("No. 8-128 characters only.");
+    alert("Not so fast, mortal! 8-128 characters only.");
   }
+  // need to be able to negate queries over 128 characters
+  if (howMuch > 128) {
+    alert("That's too many! 8-128 characters only.");
+  }
+  // subsequent prompts
   console.log(howMuch)
   if (howMuch >=8) {
-    var specialChar = prompt("Include special characters? (yes or no)");
-    var number = prompt("Include numbers? (yes or no)");
-    var lowCase = prompt("Include lower case characters? (yes or no)");
-    var upCase = prompt("Include upper case characters? (yes or no)");
+    var specialChar = confirm("Include special characters?");
+    var number = confirm("Include numbers?");
+    var lowCase = confirm("Include lower case characters?");
+    var upCase = confirm("Include upper case characters?");
     console.log(specialChar);
     console.log(number);
     console.log(lowCase);
     console.log(upCase);
   }
-}
 
+// letter array
 
-//  var password = generatePassword();
+// method for changing letter to uppercase toupper
+
 //  var passwordText = document.querySelector("#password");
 
 //  passwordText.value = password;
@@ -34,17 +42,15 @@ function writePassword() {
 
 // one collection of possibilities that starts at 0
 
-// one collection of possibilities that starts at "A"
-
-// ability to designate between upper and lowercase letters
+// check for cases when characters are omitted (parse ent; while loop)
 
 // one collection of possibilities that includes special characters
 
 // If NULL then repeat question
 
-// Prompts: What characters does the password need to contain?
+//  var password = generatePassword();
 
-
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
