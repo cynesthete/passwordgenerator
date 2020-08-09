@@ -2,26 +2,29 @@
 
 //global variables
 var num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var capLet = ["A", "B", ];
-var lowLet = ["a", "b", "c",];
-var specChar = ["!", "@", "#", "$", "%", ];
+var capLet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var lowLet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var specChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "=", "-", "_", "`", "~", "<", ">", ",", ".", "?"];
 
+// Generate Button Query Selector
 var generateBtn = document.querySelector("#generate");
 console.log("text")
 
-// var special characters && ! @ # (make an array for each)
+// Generate pw function
 function generatePassword() {
+// Specify number of characters
   var howMuch = parseInt(prompt("Specify number of characters"));
+// negate queries under 8 characters
   if (howMuch < 8) {
     alert("Not so fast, mortal! 8-128 characters only.");
     return;
   }
-  // need to be able to negate queries over 128 characters
+  // negate queries over 128 characters
   if (howMuch > 128) {
     alert("That's too many! 8-128 characters only.");
     return;
   }
-  // subsequent prompts
+  // confirms
   console.log(howMuch)
   var specialChar = confirm("Include special characters?");
   var number = confirm("Include numbers?");
@@ -31,11 +34,12 @@ function generatePassword() {
   console.log(number);
   console.log(lowCase);
   console.log(upCase);
-
+// Make it such that user must use at least one type of character
   if (specialChar === false && number === false && lowCase === false && upCase === false) {
-    alert("You must at least one type of character to create a password");
+    alert("You must use at least one type of character to create a password");
     return;
   }
+
   // empty arrays
   var passwordStore = [];
   var passwordOptions = [];
@@ -48,50 +52,40 @@ function generatePassword() {
   }
   if (number === true) {
     passwordOptions = passwordOptions.concat(num);
-    --
+    insurance.push(num[Math.floor(Math.random() * num.length)]);
   }
   if (lowCase === true) {
     passwordOptions = passwordOptions.concat(lowLet);
-    --
+    insurance.push(lowLet[Math.floor(Math.random() * lowLet.length)]);
   }
   if (upCase === true) {
     passwordOptions = passwordOptions.concat(capLet);
-    --
+    insurance.push(capLet[Math.floor(Math.random() * capLet.length)]);
+  }
+// for loop + add elements to eo array
+  for (var i = 0; i < howMuch; i++) {
+  passwordStore.push(passwordOptions[Math.floor(Math.random() * passwordOptions.length)]);
   }
 
-  for (var i = 0; i < howMuch; i++) {
-    passwordStore.push(passwordOptions[Math.floor(Math.random() * passwordOptions.length)])
-  }
-  //insurance at index of zero (replacing index at pw store w inde at insurance, ensure one type of every character asked for)
+// insurance at index of zero 
+// (replacing index at pw store w index at insurance, 
+// ensure one type of every character asked for)
   for (var i = 0; i < insurance.length; i++) {
-    passwordStore[i]=insurance[i];
-  }
-  // intial getRandom element from array using JS
-  //var item = items[Math.floor(Math.random() * items.length)];
-  console.log(passwordStore);
-  return passwordStore.join("");
+  passwordStore[i] = insurance[i];
 }
 
+// return string + concatenate
+  return passwordStore.join("");
+}
 
 // Write password to the #password input
 
 function writePassword() {
-
-
-  // letter array
-
-  // method for changing letter to uppercase toupper
-
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
-  // check for cases when characters are omitted (parse ent; while loop)
-
-  // If NULL then repeat question
-
-  
 }
 
 // Add event listener to generate button
